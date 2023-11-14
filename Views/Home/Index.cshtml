@@ -1,8 +1,65 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Blog.Models.ViewModels.HomeViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row align-items-center g-5 py5">
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold lh-1 mb-3">
+                VPost - The Dev Spot
+            </h1>
+            <p class="lead">
+                VPost features various blogs and projects that cover a
+                wide variety of topics and ideas.
+            </p>
+        </div>
+        <div class="col-12 col-lg-6">
+            <img src="" alt="VPost- The Dev Spot" class="d-block mv-lg-auto img-fluid" width="300" />
+        </div>
+
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            @if(Model != null && Model.Tags.Any())
+            {
+                foreach(var tag in Model.Tags)
+                {
+                    <span class="badge bg-dark me-1">
+                        @tag.Name
+                    </span>
+                }
+            }
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            @if(Model != null && Model.blogPosts.Any())
+            {
+                foreach(var post in Model.blogPosts)
+                {
+                    <div class="mb-5 bg-light box-shadow">
+                        <img src="@post.FeaturedImageUrl" alt="@post.Heading" class="mb-2 d-block img-fluid">
+                        <h2 class="mb-2">@post.Heading</h2>
+                        <p class="mb-2">
+                            Author:@post.Author
+                            <br/>
+                            Published Date: @post.PublishedDate.ToShortDateString()
+                        </p>
+                        <p class="mb-4">
+                            @foreach (var tag in post.Tags)
+                            {
+                                <span class="badge bg-secondary me-1">@tag.Name</span>
+                            }
+                        </p>
+                        <p class="mb-4">
+                            @post.ShortDescription
+                        </p>
+                        <a class="btn btn-dark" asp-area="" asp-controller="Blog" asp-route-urlHandel="@post.UrlHandle">Read More</a>
+                    </div>
+                }
+            }
+        </div>
+    </div>
 </div>

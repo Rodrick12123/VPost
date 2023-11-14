@@ -1,4 +1,6 @@
 ﻿using Blog.Models;
+using Blog.Models.ViewModels;
+using Blog.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,15 +9,30 @@ namespace Blog.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly ITagRepository tagRepo;
+        private readonly IBlogPostRepository blogRepo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,ITagRepository tagRepo, IBlogPostRepository blogRepo)
         {
             _logger = logger;
+            this.tagRepo = tagRepo;
+            this.blogRepo = blogRepo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            //Get all of the blog posts
+            var post = await blogRepo.GetAllAsync();
+            //Get all of the tags
+            var tags = await tagRepo.GetAllAsync();
+            //Combine two view models in HomeViewModel
+            var Model = new HomeViewModel
+            {
+                blogPosts = post,
+                Tags = tags
+            };
+
+            return View(Model);
         }
 
         public IActionResult Privacy()

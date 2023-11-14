@@ -1,6 +1,7 @@
 ﻿using Blog.Data;
 using Blog.Models.Domain;
 using Blog.Models.ViewModels;
+using Blog.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,10 +9,11 @@ namespace Blog.Controllers
 {
     public class AdminTagsController : Controller
     {
-        private BlogDbContext blogDbContext;
-        public AdminTagsController(BlogDbContext blogContext) {
-            this.blogDbContext = blogContext;
+        private readonly ITagRepository tagRepository;
+        public AdminTagsController(ITagRepository tagRepository) {
+            this.tagRepository = tagRepository;
         }
+
         [HttpGet]
         public IActionResult Add()
         {
@@ -30,11 +32,7 @@ namespace Blog.Controllers
             };
             //include check if Name already exsist
 
-            //add the model instance to the tag table in the DB
-            await blogDbContext.Tags.AddAsync(tag);
-
-            //save changes to db
-            await blogDbContext.SaveChangesAsync();
+            await tagRepository.AddAsync(tag);
 
             return RedirectToAction("List");
         }
@@ -45,7 +43,8 @@ namespace Blog.Controllers
         public async Task<IActionResult> List()
         {
             //Use the dbContext to read the tags
-            var tags = await blogDbContext.Tags.ToListAsync();
+
+            var tags = await tagRepository.GetAllAsync();
 
             return View(tags);
         }
@@ -53,7 +52,7 @@ namespace Blog.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var tag = await blogDbContext.Tags.FirstOrDefaultAsync(x => x.Id == id);
+            var tag = await tagRepository.GetAsync(id);
             if(tag != null)
             {
                 var editTagRequest = new EditTagRequest
@@ -77,29 +76,26 @@ namespace Blog.Controllers
                 DisplayName = request.DisplayName
             };
 
-            var exsistingTag = await blogDbContext.Tags.FindAsync(tag.Id);
-            
+            var exsistingTag = await tagRepository.UpdateAsync(tag);
             if(exsistingTag != null)
             {
-                //add a check to see if name exsists
-                exsistingTag.Name = tag.Name;
-                exsistingTag.DisplayName = tag.DisplayName;
-
-                await blogDbContext.SaveChangesAsync();
-                return RedirectToAction("Edit", new { id = request.Id });
 
             }
+            else
+            {
+
+            }
+            
             return RedirectToAction("Edit", new { id = request.Id });
         }
 
         [HttpPost]
         public async Task<IActionResult> Delete(EditTagRequest request)
         {
-            var tag = await blogDbContext.Tags.FindAsync(request.Id);
+            var tag = await tagRepository.DeleteAsync(request.Id);
+            
             if(tag != null)
             {
-                blogDbContext.Remove(tag);
-                await blogDbContext.SaveChangesAsync();
 
                 return RedirectToAction("List");
             }

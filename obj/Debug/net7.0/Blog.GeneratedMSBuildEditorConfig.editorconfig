@@ -16,6 +16,18 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\rodri\Blog
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/rodri/Blog/Views/AdminBlogPost/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5CbG9nUG9zdFxBZGQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rodri/Blog/Views/AdminBlogPost/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5CbG9nUG9zdFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rodri/Blog/Views/AdminBlogPost/List.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5CbG9nUG9zdFxMaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/rodri/Blog/Views/AdminTags/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5UYWdzXEFkZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -26,6 +38,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/rodri/Blog/Views/AdminTags/List.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5UYWdzXExpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/rodri/Blog/Views/Blog/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmxvZ1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/rodri/Blog/Views/Home/Index.cshtml]

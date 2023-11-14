@@ -1,4 +1,5 @@
 using Blog.Data;
+using Blog.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,11 @@ builder.Services.AddControllersWithViews();
 
 //inject dbcontext
 builder.Services.AddDbContext<BlogDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BlogDbConnectionString")));
+builder.Services.AddScoped<ITagRepository, TagRepository>();
+builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
+
+//Upload Interface Services
+builder.Services.AddScoped<IimageRepository, CloudinaryImageRepository>();
 
 var app = builder.Build();
 
