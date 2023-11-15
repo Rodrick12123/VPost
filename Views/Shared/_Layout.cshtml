@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> loginManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +10,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Blog.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
     <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
     <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
 </head>
@@ -27,21 +32,40 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="AdminTags" asp-action="Add">Add Tag</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="AdminTags" asp-action="List">Show All Tags</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="AdminBlogPost" asp-action="Add">Add Blog Post</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="AdminBlogPost" asp-action="List">All Blog Post</a></li>
-                            </ul>
-                            
-                        </li>
+                        
+                        @if (loginManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="AdminTags" asp-action="Add">Add Tag</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="AdminTags" asp-action="List">Show All Tags</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="AdminBlogPost" asp-action="Add">Add Blog Post</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="AdminBlogPost" asp-action="List">All Blog Post</a></li>
+                                </ul>
+                            </li>
+                        }
+                        
                         
                     </ul>
+                    <div class="d-flex align-items-center">
+                        @if (loginManager.IsSignedIn(User))
+                        {
+                            <div class="me-3 text-light">
+                                @User?.Identity?.Name
+                            </div>
+                            <a class="btn me-3 bg-light text-dark" asp-action="Logout" asp-area="" asp-controller="Account">Logout</a>
+                        }
+                        else
+                        {
+                            <a class="btn me-3 bg-light text-dark" asp-action="Login" asp-area="" asp-controller="Account">Login</a>
+                            <a class="btn me-3 bg-light text-dark" asp-action="Register" asp-area="" asp-controller="Account">Register</a>
+                        }
+                        
+                    </div>
+                   
                 </div>
             </div>
         </nav>

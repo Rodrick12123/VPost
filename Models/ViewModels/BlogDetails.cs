@@ -1,6 +1,8 @@
-﻿namespace Blog.Models.Domain
+﻿using Blog.Models.Domain;
+
+namespace Blog.Models.ViewModels
 {
-    public class BlogPost
+    public class BlogDetails
     {
         public Guid Id { get; set; }
         public string Heading { get; set; }
@@ -16,7 +18,6 @@
         //initiailize sql relationship
         public ICollection<Tag> Tags { get; set; }
 
-        public ICollection<BlogPostLike>  Likes { get; set; }
-
+        public int LikeTotal { get; set; }
     }
 }
