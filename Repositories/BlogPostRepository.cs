@@ -38,13 +38,14 @@ namespace Blog.Repositories
         public async Task<IEnumerable<BlogPost>> GetAllAsync()
         {
             //blog posts includes relation db
-            return await dbContext.BlogPosts.Include(t => t.Tags).ToListAsync();
+            var allBlogs = await dbContext.BlogPosts.Include(t => t.Tags).ToListAsync();
+            return allBlogs;
         }
 
         public async Task<BlogPost?> GetAsync(Guid id)
         {
-
-            return await dbContext.BlogPosts.Include(t => t.Tags).FirstOrDefaultAsync(p => p.Id == id);
+            var post = await dbContext.BlogPosts.Include(t => t.Tags).FirstOrDefaultAsync(p => p.Id == id);
+            return post;
         }
 
         public async Task<BlogPost?> GetUrlHandelAsync(string urlHandel)

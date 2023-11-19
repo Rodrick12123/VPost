@@ -15,6 +15,7 @@ namespace Blog.Data
         public DbSet<Tag> Tags { get; set; }
 
         public DbSet<BlogPostLike> BlogPostLikes { get; set; }
+        public DbSet<PostComment> PostComments { get; set; }
 
     }
 }

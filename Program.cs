@@ -22,12 +22,13 @@ builder.Services.Configure<IdentityOptions>(option =>
     option.Password.RequireDigit = true;
     option.Password.RequireLowercase = true;
     option.Password.RequireUppercase = true;
-    option.Password.RequiredUniqueChars = 1;
 });
 
 builder.Services.AddScoped<ITagRepository, TagRepository>();
 builder.Services.AddScoped<IBlogPostRepository, BlogPostRepository>();
 builder.Services.AddScoped<IBlogPostLikeRepository, BlogPostLikeRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBlogPostCommentRepository, BlogPostComment>();
 
 //Upload Interface Services
 builder.Services.AddScoped<IimageRepository, CloudinaryImageRepository>();

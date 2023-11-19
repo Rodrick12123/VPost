@@ -14,10 +14,13 @@ namespace Blog.Models.ViewModels
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
         public bool Visible { get; set; }
+        public string CommentDescription { get; set; }
+        public IEnumerable<CommentView> Comments { get; set; }
 
         //initiailize sql relationship
         public ICollection<Tag> Tags { get; set; }
 
+        public bool Liked { get; set; }
         public int LikeTotal { get; set; }
     }
 }

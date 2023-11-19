@@ -20,7 +20,7 @@ namespace Blog.Controllers
         [Route("Add")]
         public async Task<IActionResult> AddLike([FromBody] AddLikeRequest likeRequest)
         {
-            
+
             var model = new BlogPostLike
             {
                 BlogPostId = likeRequest.BlogPostId,
@@ -28,7 +28,15 @@ namespace Blog.Controllers
             };
             await likeRepo.AddLike(model);
             return Ok();
-            
+
+        }
+
+        [HttpGet]
+        [Route("PostId:Guid")]
+        public async Task<IActionResult> GetTotalLikes([FromRoute]Guid postId)
+        {
+            var totalAmountOfLikes = await likeRepo.GetLikeTotal(postId);
+            return Ok(totalAmountOfLikes);
         }
     }
 }

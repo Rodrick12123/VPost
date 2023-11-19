@@ -21,11 +21,23 @@
                 <div class="mb-3">
                     @if (loginManager.IsSignedIn(User))
                     {
-                        <a id="like" class="btn btn-dark" style="cursor:pointer">
-                            <i class="bi bi-heart-fill"></i>
-                        </a>
+                        @if (Model.Liked)
+                        {
+                            <a class="btn btn-dark" style="cursor:pointer">
+                                <i class="bi bi-heart-fill"></i>
+
+                            </a>
+                        }
+                        else
+                        {
+                            <a id="like" class="btn btn-dark" style="cursor:pointer">
+                                <i class="bi bi-heart"></i>
+
+                            </a>
+                        }
+                        
                     }
-                    <span>@Model.LikeTotal likes</span>
+                    <span id="likes">@Model.LikeTotal likes</span>
                 </div>
                 
                 <div class="mb-3 d-flex">
@@ -38,6 +50,45 @@
                 <div class="mb-3 blog-content">
                     @Html.Raw(Model.Content);
                 </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Comments</h4>
+                        @if (loginManager.IsSignedIn(User))
+                        {
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label class="form-label">Comment Here</label>
+                                    <input type="text" class="form-control" asp-for="CommentDescription"/>
+                                    <input type="hidden" asp-for="Id"/>
+                                    <input type="hidden" asp-for="UrlHandle"/>
+                                </div>
+                                <div class=mb-3>
+                                    <button type="submit" class="btn btn-dark">Submit</button>
+                                </div>
+                            </form>
+                        }
+                    </div>
+                    <div class="card-body">
+                        @if(Model.Comments != null && Model.Comments.Any())
+                        {
+                            @foreach(var comment in Model.Comments)
+                            {
+                                <div class="mb-3 card">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-secoundary">@comment.UserName</span>
+                                            <span class="text-secoundary">@comment.CommentDate</span>
+                                        </div>
+                                        <div>
+                                            @comment.Description
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                
 
             }
             else
@@ -51,16 +102,33 @@
 @section Scripts{
     <script>
         const likeButtonElement = document.getElementById("like");
-        async function addBlogLike(){
+        const totalLikesElement = document.getELementById("likes");
+
+        async function getLikeTotal(){
+            fetch('/api/BlogLike/@Model.Id/GetTotalLikes', {
+                method: 'GET',
+                headers: {
+                    'Content-Type:' 'application/json',
+                    'Accept': '*/*'
+                }
+            }).then(data => data.json())
+            .then(result => totalLikesElement.innerHTML = result)
+        }
+        async function addBlogLike() {
             fetch('/api/BlogLike/Add', {
                 method: 'POST',
-                headers:{
-                    'Content-Type':'application/json',
-                    'Accept':'*/*'
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
                 },
-                body: JSON.stringify({ BlogPostId: '@Model.Id', UserId: '@userManager.GetUserId(User)'})
+                body: JSON.stringify({ BlogPostId: '@Model.Id', UserId: '@userManager.GetUserId(User)' })
             })
-            .then(console.log("Like Request Completed"))
+                .then(() => {
+                    likeButtonElement.innerHTML = ' <i class="bi bi-heart-fill"></i>';
+                    likeButtonElement.removeEventListener('click', addBlogLike);
+                    getLikeTotal();
+                    )};
+                
         }
 
         likeButtonELement.addEventListner('click', addBlogLike);

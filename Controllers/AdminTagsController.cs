@@ -27,6 +27,11 @@ namespace Blog.Controllers
         [ActionName("Add")]
         public async Task<IActionResult> Add(AddTagRequest request)
         {
+            
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
             //create model using form data
             var tag = new Tag
             {
