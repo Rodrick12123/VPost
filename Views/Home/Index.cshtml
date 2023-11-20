@@ -20,7 +20,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
-            @if(Model != null && Model.Tags.Any())
+            @if(Model != null)
             {
                 foreach(var tag in Model.Tags)
                 {
@@ -40,7 +40,11 @@
                 foreach(var post in Model.blogPosts)
                 {
                     <div class="mb-5 bg-light box-shadow">
-                        <img src="@post.FeaturedImageUrl" alt="@post.Heading" class="mb-2 d-block img-fluid">
+
+                        @if (post.FeaturedImageUrl != null)
+                        {
+                            <img src="@post.FeaturedImageUrl" alt="@post.Heading" class="mb-2 d-block img-fluid">
+                        }
                         <h2 class="mb-2">@post.Heading</h2>
                         <p class="mb-2">
                             Author:@post.Author

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Blog.Migrations.AuthDb
+namespace Blog.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
     partial class AuthDbContextModelSnapshot : ModelSnapshot
@@ -166,15 +166,15 @@ namespace Blog.Migrations.AuthDb
                         {
                             Id = "0b275ad8-842d-4423-ba91-a27ebbc0f3e7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "874d62bb-4d1f-4b06-b7f4-328a2a5e89fc",
+                            ConcurrencyStamp = "d7a7914e-ec1b-4a22-83cf-239f2420f31a",
                             Email = "superAdmin@vpost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@VPOST.COM",
                             NormalizedUserName = "SUPERADMIN@VPOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGpx9aZCoqHJ/XWShIb33727hnPAXjkr5R9YYhLPdnCxXQ3ccgzz7SvTM+HTAeltxA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBCnTFwgFmPp9GtSYX82BchXelWyZ5MCfVv1FK8JQLUwNrfySao+atz+e7xxmGI4xw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d9cb9d61-72c5-4b57-af4c-c0072d1ac853",
+                            SecurityStamp = "ddde5c6f-02b9-45f7-84de-3fde89059ad2",
                             TwoFactorEnabled = false,
                             UserName = "superAdmin@vpost.com"
                         });

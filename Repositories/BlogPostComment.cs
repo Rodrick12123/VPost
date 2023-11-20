@@ -21,7 +21,8 @@ namespace Blog.Repositories
 
         public async Task<IEnumerable<PostComment>> GetAllCommentsByPostId(Guid postId)
         {
-            return await blogContext.PostComments.Where(p => p.BlogPostId == postId).ToListAsync();
+            var comment = await blogContext.PostComments.Where(p => p.BlogPostId == postId).ToListAsync();
+            return comment;
         }
     }
 }

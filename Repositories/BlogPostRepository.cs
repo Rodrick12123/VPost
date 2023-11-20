@@ -39,6 +39,7 @@ namespace Blog.Repositories
         {
             //blog posts includes relation db
             var allBlogs = await dbContext.BlogPosts.Include(t => t.Tags).ToListAsync();
+           
             return allBlogs;
         }
 
@@ -50,6 +51,7 @@ namespace Blog.Repositories
 
         public async Task<BlogPost?> GetUrlHandelAsync(string urlHandel)
         {
+
             var blog = await dbContext.BlogPosts.Include(t => t.Tags).FirstOrDefaultAsync(b => b.UrlHandle == urlHandel);
             return blog;
         }
