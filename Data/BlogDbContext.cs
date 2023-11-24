@@ -17,5 +17,11 @@ namespace Blog.Data
         public DbSet<BlogPostLike> BlogPostLikes { get; set; }
         public DbSet<PostComment> PostComments { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            
+
+
+        }
     }
 }

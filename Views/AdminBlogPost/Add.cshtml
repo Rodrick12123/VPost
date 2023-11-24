@@ -74,19 +74,26 @@
 </div>
 
 @section Scripts{
+
     <script>
         var editor = new FroalaEditor("#content", {
             imageUploadURL: '/api/images'
         });
+        //CKEDITOR.replace('content');
 
 
         const featuredUpload = document.getElementById("featuredImageUpload");
         const featuredImageUrlElement = document.getElementById("featuredImageUrl");
         const featuredImageElement = document.getElementById("featuredImage");
 
-        async function upoloadFeaturedImage(e){
+        async function uploadFeaturedImage(e) {
+            console.log(e.target.files[0]);
+            //form data init
             let data = new FormData();
-            data.append('file', e.trget.files[0]);
+            
+            data.append('file', e.target.files[0]);
+            
+
             await fetch('/api/images', {
                 method: 'POST',
                 headers: {
@@ -94,12 +101,13 @@
                 },
                 body: data
             }).then(response => response.json()).then(result => { 
+                console.log(result);
                 featuredImageUrlElement.value = result.link;
                 featuredImageElement.src = result.link;
                 featuredImageElement.style.display = "block";
             });
         };
 
-        featuredUpload.addEventListener('change', uploadFeaturedImage)
+        featuredUpload.addEventListener('change', uploadFeaturedImage);
     </script>
 }

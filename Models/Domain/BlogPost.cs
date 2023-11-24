@@ -1,4 +1,6 @@
-﻿namespace Blog.Models.Domain
+﻿using System.Diagnostics.Contracts;
+
+namespace Blog.Models.Domain
 {
     public class BlogPost
     {
@@ -13,11 +15,13 @@
         public string Author { get; set; }
         public bool Visible { get; set; }
 
+        public Guid? UserId { get; set; } 
+
         //initiailize sql relationship
         public ICollection<Tag> Tags { get; set; }
 
         public ICollection<BlogPostLike>  Likes { get; set; }
         public ICollection<PostComment> Comments { get; set; }
-
+        
     }
 }

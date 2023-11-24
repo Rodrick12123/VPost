@@ -8,5 +8,7 @@
 
         //define sql relationship
         public ICollection<BlogPost> BlogPosts { get; set; }
+
+
     }
 }

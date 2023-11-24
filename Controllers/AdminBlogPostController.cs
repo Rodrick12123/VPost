@@ -2,6 +2,7 @@
 using Blog.Models.ViewModels;
 using Blog.Repositories;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -12,11 +13,16 @@ namespace Blog.Controllers
     {
         private readonly ITagRepository tagRepository;
         private readonly IBlogPostRepository blogRepository;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> loginManager;
 
-        public AdminBlogPostController(ITagRepository tagRepository, IBlogPostRepository blogRepository)
+        public AdminBlogPostController(ITagRepository tagRepository, IBlogPostRepository blogRepository,
+            UserManager<IdentityUser> userManager, SignInManager<IdentityUser> loginManager)
         {
             this.tagRepository = tagRepository;
             this.blogRepository = blogRepository;
+            this.userManager = userManager;
+            this.loginManager = loginManager;
         }
 
         [HttpGet]
@@ -44,8 +50,12 @@ namespace Blog.Controllers
                 PublishedDate = request.PublishedDate,
                 Author = request.Author,
                 Visible = request.Visible,
-                
+
             };
+            if (loginManager.IsSignedIn(User) == true){
+                blogPost.UserId = Guid.Parse(userManager.GetUserId(User));
+
+            }
             var selectedTags = new List<Tag>();
             foreach (var tagId in request.SelectedTags)
             {
@@ -120,6 +130,11 @@ namespace Blog.Controllers
                 UrlHandle = request.UrlHandle,
                 Visible = request.Visible
             };
+            if (loginManager.IsSignedIn(User) == true)
+            {
+                domain.UserId = Guid.Parse(userManager.GetUserId(User));
+
+            }
 
             //map tags to domain model
             var selectedTags = new List<Tag>();
