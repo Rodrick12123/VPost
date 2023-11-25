@@ -1,11 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\Models",
-    "\\Models\\ViewModels",
-    "\\Views",
-    "\\Views\\AdminTags"
+    ""
   ],
-  "SelectedNode": "\\Views\\AdminTags\\Edit.cshtml",
+  "SelectedNode": "\\appsettings.json",
   "PreviewInSolutionExplorer": false
 }
