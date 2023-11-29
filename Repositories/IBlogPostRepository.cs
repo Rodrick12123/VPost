@@ -5,6 +5,8 @@ namespace Blog.Repositories
     public interface IBlogPostRepository
     {
         Task<IEnumerable<BlogPost>> GetAllAsync();
+        Task<IEnumerable<BlogPost>?> GetAllPendingAsync();
+        Task<IEnumerable<BlogPost>?> GetAllVerifiedAsync();
 
         Task<BlogPost?> GetAsync(Guid id);
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "1mQL3f4rLA0vi8lHZFAHvNI1OWRuQuFIjkj050U0/7tDD4eB2NPYrExvwOz4H9y4ulcK1yRanG3drPSsoWnUUQ==",
+  "dgSpecHash": "1SOKNfyBZew5AkHtYiI1pLwF0fhv/N7BE1x+bdRVlWp+c9Bft5wTK6UF2HvHL5fasgQom3aXIoKaJeLHS2VTSg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Rodrick\\Projects\\Websites\\Net\\Repos\\Blog.csproj",
   "expectedPackageFiles": [
@@ -116,7 +116,8 @@
     "C:\\Users\\Rodrick\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\Rodrick\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\Rodrick\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
-    "C:\\Users\\Rodrick\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
+    "C:\\Users\\Rodrick\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Rodrick\\.nuget\\packages\\wysihtml5\\0.3.0.4\\wysihtml5.0.3.0.4.nupkg.sha512"
   ],
   "logs": []
 }

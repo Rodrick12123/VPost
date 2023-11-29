@@ -14,6 +14,8 @@ namespace Blog.Models.ViewModels
         public DateTime PublishedDate { get; set; }
         public string Author { get; set; }
         public bool Visible { get; set; }
+        public string Verified { get; set; }
+        public bool Pending { get; set; }
 
         public IEnumerable<SelectListItem> Tags { get; set; }
 

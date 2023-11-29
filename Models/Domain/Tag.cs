@@ -8,6 +8,8 @@
 
         //define sql relationship
         public ICollection<BlogPost> BlogPosts { get; set; }
+        public Guid UserId { get; set; }
+        public UserDomain User { get; set; } = null!;
 
 
     }

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Hosting;
 
 namespace Blog.Controllers
 {
@@ -50,6 +51,8 @@ namespace Blog.Controllers
                 PublishedDate = request.PublishedDate,
                 Author = request.Author,
                 Visible = request.Visible,
+                Pending = false,
+                Verified = true,
 
             };
             if (loginManager.IsSignedIn(User) == true){
@@ -71,9 +74,9 @@ namespace Blog.Controllers
 
             await blogRepository.AddAsync(blogPost);
 
-            return RedirectToAction("Add");
+            return RedirectToAction("Index", "Home");
         }
-
+        //ToDo: Include pending status, filters, etc
         [HttpGet]
         public async Task<IActionResult> List()
         {
@@ -102,9 +105,19 @@ namespace Blog.Controllers
                     FeaturedImageUrl = post.FeaturedImageUrl,
                     PublishedDate = post.PublishedDate,
                     Visible = post.Visible,
+                    Pending = post.Pending,
+                    ShortDescription = post.ShortDescription,
                     Tags = tags.Select(t => new SelectListItem { Text = t.Name, Value = t.Id.ToString() }),
                     SelectedTags = post.Tags.Select(t => t.Id.ToString()).ToArray()
                 };
+                if(post.Verified == true)
+                {
+                    viewPost.Verified = "true";
+                }
+                else
+                {
+                    viewPost.Verified = "false";
+                }
                 return View(viewPost);
             }
 
@@ -116,6 +129,7 @@ namespace Blog.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(EditPostRequest request)
         {
+
             //map domain model to request
             var domain = new BlogPost
             {
@@ -128,8 +142,22 @@ namespace Blog.Controllers
                 FeaturedImageUrl = request.FeaturedImageUrl,
                 PublishedDate = request.PublishedDate,
                 UrlHandle = request.UrlHandle,
-                Visible = request.Visible
+                Pending = false,
+                Visible = request.Visible,
+
             };
+
+            if(bool.TryParse(request.Verified, out bool parsed))
+            {
+                domain.Verified = parsed;
+            }
+            else
+            {
+                domain.Pending = true;
+                ModelState.AddModelError("Verified", "Invalid type, input requires true or false.");
+            }
+            
+
             if (loginManager.IsSignedIn(User) == true)
             {
                 domain.UserId = Guid.Parse(userManager.GetUserId(User));

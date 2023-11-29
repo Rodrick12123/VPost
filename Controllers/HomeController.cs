@@ -6,6 +6,8 @@ using System.Diagnostics;
 
 namespace Blog.Controllers
 {
+    //Ideal: Home page should include other posts,
+    //such as Music, stories, adds, etc
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -22,7 +24,7 @@ namespace Blog.Controllers
         public async Task<IActionResult> Index()
         {
             //Get all of the blog posts
-            var post = await blogRepo.GetAllAsync();
+            var post = await blogRepo.GetAllVerifiedAsync();
             //Get all of the tags
             var tags = await tagRepo.GetAllAsync();
             //Combine two view models in HomeViewModel

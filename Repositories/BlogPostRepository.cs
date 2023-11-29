@@ -3,6 +3,7 @@ using Blog.Data;
 using Blog.Models.Domain;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace Blog.Repositories
 {
@@ -14,6 +15,19 @@ namespace Blog.Repositories
         {
             this.dbContext = dbContext;
         }
+
+        public async Task<IEnumerable<BlogPost>?> GetAllVerifiedAsync()
+        {
+            var verifiedPost = await dbContext.BlogPosts.Include(t => t.Tags).Where(p => p.Verified == true).ToListAsync();
+            return verifiedPost;
+        }
+
+        public async Task<IEnumerable<BlogPost>?> GetAllPendingAsync()
+        {
+            var pendingPost = await dbContext.BlogPosts.Include(t => t.Tags).Where(p => p.Pending == true).ToListAsync();
+            return pendingPost;
+        }
+
         public async Task<BlogPost> AddAsync(BlogPost post)
         {
             await dbContext.AddAsync(post);
@@ -72,6 +86,8 @@ namespace Blog.Repositories
                 existingBlog.UrlHandle = post.UrlHandle;
                 existingBlog.Visible = post.Visible;
                 existingBlog.Tags = post.Tags;
+                existingBlog.Verified = post.Verified;
+                existingBlog.Pending = post.Pending;
                 await dbContext.SaveChangesAsync();
                 return existingBlog;
             }

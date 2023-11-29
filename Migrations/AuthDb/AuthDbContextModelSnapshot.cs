@@ -166,15 +166,15 @@ namespace Blog.AuthDb
                         {
                             Id = "0b275ad8-842d-4423-ba91-a27ebbc0f3e7",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d7a7914e-ec1b-4a22-83cf-239f2420f31a",
+                            ConcurrencyStamp = "ae36a2a2-6f54-4e26-84d6-36522cd602a9",
                             Email = "superAdmin@vpost.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@VPOST.COM",
                             NormalizedUserName = "SUPERADMIN@VPOST.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEBCnTFwgFmPp9GtSYX82BchXelWyZ5MCfVv1FK8JQLUwNrfySao+atz+e7xxmGI4xw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEIMngPP9SjD50W7uIsbDtjVo+f29hzaVffmF871p+bJdlNeaXCHMWebNzEbCyTQipw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "ddde5c6f-02b9-45f7-84de-3fde89059ad2",
+                            SecurityStamp = "7e01999e-5c72-4f21-9d48-70ff80ea33d2",
                             TwoFactorEnabled = false,
                             UserName = "superAdmin@vpost.com"
                         });

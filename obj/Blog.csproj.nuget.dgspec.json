@@ -66,6 +66,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.13, )"
+            },
+            "wysihtml5": {
+              "target": "Package",
+              "version": "[0.3.0.4, )"
             }
           },
           "imports": [

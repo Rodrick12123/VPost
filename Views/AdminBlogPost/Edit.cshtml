@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Content</label>
-                <textarea class="form-control" id="content" asp-for="Content"></textarea>
+                <textarea class="form-control" id="content" asp-for="Content">@Html.Raw(Model.Content)</textarea>
             </div>
             <div class="mb-3">
                 <label class="form-label">Short Desciption</label>
@@ -77,10 +77,22 @@
                 </select>
             </div>
 
+            <div class="mb-3">
+                <label class="form-label">Verified?</label>
+                <input class="form-control" type="text" id="verified" asp-for="Verified" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Pending?</label>
+                <input class="form-control" type="text" id="pending" asp-for="Pending" readonly />
+            </div>
+
             <div class="mb-3 d-flex ms-2">
                 <button type="submit" class="btn btn-dark">Submit</button>
                 <button type="submit" class="btn btn-danger" asp-area="" asp-controller="AdminBlogPost" asp-action="Delete">Delete</button>
             </div>
+
+            
 
 
         </form>
@@ -97,7 +109,11 @@
         var editor = new FroalaEditor("#content", {
             imageUploadURL: '/api/images'
         })
-
+        //var quill = new Quill('#content', {
+        //    theme: 'snow',
+        //    imageUploadURL: '/api/images'
+        //});
+        
         //Image functionality
         const featuredUpload = document.getElementById("featuredImageUpload");
         const featuredImageUrlElement = document.getElementById("featuredImageUrl");

@@ -12,7 +12,8 @@
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "7.0.14",
           "Microsoft.EntityFrameworkCore": "7.0.14",
           "Microsoft.EntityFrameworkCore.SqlServer": "7.0.13",
-          "Microsoft.EntityFrameworkCore.Tools": "7.0.13"
+          "Microsoft.EntityFrameworkCore.Tools": "7.0.13",
+          "wysihtml5": "0.3.0.4"
         },
         "runtime": {
           "Blog.dll": {}
@@ -1008,7 +1009,8 @@
             "fileVersion": "6.0.21.52210"
           }
         }
-      }
+      },
+      "wysihtml5/0.3.0.4": {}
     }
   },
   "libraries": {
@@ -1807,6 +1809,13 @@
       "sha512": "sha512-IXoJOXIqc39AIe+CIR7koBtRGMiCt/LPM3lI+PELtDIy9XdyeSrwXFdWV9dzJ2Awl0paLWUaknLxFQ5HpHZUog==",
       "path": "system.windows.extensions/6.0.0",
       "hashPath": "system.windows.extensions.6.0.0.nupkg.sha512"
+    },
+    "wysihtml5/0.3.0.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-v2UTzI/9Pw0Jse+eXT00oIKFw/GcNTCD8wzkV7jdUXGXVUU23XhXSkgGE9a1PezNuHzrapDVCidCnTDoPkmg3g==",
+      "path": "wysihtml5/0.3.0.4",
+      "hashPath": "wysihtml5.0.3.0.4.nupkg.sha512"
     }
   }
 }
