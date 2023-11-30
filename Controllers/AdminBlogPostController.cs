@@ -26,6 +26,7 @@ namespace Blog.Controllers
             this.loginManager = loginManager;
         }
 
+        //Fetches all tags that can be selected for a post.
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -37,6 +38,8 @@ namespace Blog.Controllers
             return View(model);
         }
 
+        //Creates and sets up a new BlogPost object
+        //Each entry assigned to BlogPost will depend on the entry received from the client in the view
         [HttpPost]
         public async Task<IActionResult> Add(AddBlogPostRequest request)
         {
@@ -55,10 +58,12 @@ namespace Blog.Controllers
                 Verified = true,
 
             };
+            //Include link to User if applicable (Should allways be applcable)
             if (loginManager.IsSignedIn(User) == true){
                 blogPost.UserId = Guid.Parse(userManager.GetUserId(User));
 
             }
+            //Assigns the selected tags from the client side to blogDB tags
             var selectedTags = new List<Tag>();
             foreach (var tagId in request.SelectedTags)
             {

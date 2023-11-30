@@ -18,12 +18,12 @@
                     <span class="text-secoundary">@Model.PublishedDate</span>
                 </div>
 
-                <div class="mb-3">
+                <div id="like-container" class="mb-3">
                     @if (loginManager.IsSignedIn(User))
                     {
                         @if (Model.Liked)
                         {
-                            <a class="btn btn-dark" style="cursor:pointer">
+                            <a id ="unlike" class="btn btn-dark" style="cursor:pointer">
                                 <i class="bi bi-heart-fill"></i>
 
                             </a>
@@ -62,8 +62,10 @@
                                     <input type="hidden" asp-for="Id"/>
                                     <input type="hidden" asp-for="UrlHandle"/>
                                 </div>
+                                
                                 <div class=mb-3>
                                     <button type="submit" class="btn btn-dark">Submit</button>
+                                    <a class="btn btn-danger" asp-area="" asp-action="Response" asp-controller="Blog" asp-route-urlHandel="@Model.UrlHandle">Make Super Comment</a>
                                 </div>
                             </form>
                         }
@@ -81,6 +83,9 @@
                                         </div>
                                         <div>
                                             @comment.Description
+                                        </div>
+                                        <div>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -102,20 +107,43 @@
 @section Scripts{
     <script>
         const likeButtonElement = document.getElementById("like");
-        const totalLikesElement = document.getELementById("likes");
+        const totalLikesElement = document.getElementById("likes");
 
+        const unLikeElement = document.getElementById("unlike");
+        //ToDo: Total likes and hearts needs to dynamically change.
         async function getLikeTotal(){
+            console.log("Get")
             fetch('/api/BlogLike/@Model.Id/GetTotalLikes', {
                 method: 'GET',
                 headers: {
-                    'Content-Type:' 'application/json',
+                    'Content-Type': 'application/json',
                     'Accept': '*/*'
                 }
-            }).then(data => data.json())
-            .then(result => totalLikesElement.innerHTML = result)
+            }).then(data => data.json()).then(result => totalLikesElement.innerHTML = result)
+                .then(() => {
+                    location.reload();
+                });
         }
         async function addBlogLike() {
+            console.log("clicked")
             fetch('/api/BlogLike/Add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*'
+                },
+                body: JSON.stringify({ BlogPostId: '@Model.Id', UserId: '@userManager.GetUserId(User)' })
+            }).then(() => {
+                    //likeButtonElement.innerHTML = ' <i class="bi bi-heart-fill"></i>';
+                    //likeButtonElement.removeEventListener('click', addBlogLike);
+
+                    getLikeTotal();
+                });
+
+        }
+        async function removeBlogLike() {
+            console.log("remove")
+            fetch('/api/BlogLike/Remove', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -124,13 +152,21 @@
                 body: JSON.stringify({ BlogPostId: '@Model.Id', UserId: '@userManager.GetUserId(User)' })
             })
                 .then(() => {
-                    likeButtonElement.innerHTML = ' <i class="bi bi-heart-fill"></i>';
-                    likeButtonElement.removeEventListener('click', addBlogLike);
+                    //likeButtonElement.innerHTML = ' <i class="bi bi-heart"></i>';
+                    //unLikeElement.removeEventListener('click', removeBlogLike);
+
                     getLikeTotal();
-                    )};
-                
+
+                });
         }
 
-        likeButtonELement.addEventListner('click', addBlogLike);
+        if ("@Model.Liked" == "True") {
+            unLikeElement.addEventListener('click', removeBlogLike);
+
+
+        } else {
+            likeButtonElement.addEventListener('click', addBlogLike);
+
+        }
     </script>
 }

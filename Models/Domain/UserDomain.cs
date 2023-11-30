@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-
+//Note: Not currently implemented.
 namespace Blog.Models.Domain
 {
     public class UserDomain: IdentityUser

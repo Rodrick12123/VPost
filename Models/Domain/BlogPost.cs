@@ -22,6 +22,7 @@ namespace Blog.Models.Domain
 
         public Guid? UserId { get; set; }
         public UserDomain User { get; set; } = null!;
+        public Guid? ReplyToId { get; set; }
 
 
         //initiailize sql relationship
@@ -29,6 +30,7 @@ namespace Blog.Models.Domain
 
         public ICollection<BlogPostLike>  Likes { get; set; }
         public ICollection<PostComment> Comments { get; set; }
-        
+        public ICollection<BlogPost> BlogReplies { get; set; }
+
     }
 }

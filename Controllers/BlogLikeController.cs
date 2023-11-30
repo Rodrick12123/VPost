@@ -31,6 +31,22 @@ namespace Blog.Controllers
             return Ok();
 
         }
+        //ToDO: Fix Remove Like option
+        [HttpPost]
+        [Route("Remove")]
+        public async Task<IActionResult> RemoveLike([FromBody] AddLikeRequest likeRequest)
+        {
+
+            var model = new BlogPostLike
+            {
+                BlogPostId = likeRequest.BlogPostId,
+                UserId = likeRequest.UserId
+            };
+            await likeRepo.RemoveLike(model);
+            //ToDO: Message if like was removed
+            return Ok();
+
+        }
 
         [HttpGet]
         [Route("PostId:Guid")]

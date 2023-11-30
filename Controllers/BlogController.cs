@@ -4,6 +4,7 @@ using Blog.Models.ViewModels;
 using Blog.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection.Metadata;
 
 namespace Blog.Controllers
 {
@@ -80,7 +81,9 @@ namespace Blog.Controllers
             
             return View(viewBlogWithTotalLikes);
         }
-
+        //ToDo: Display all super comments and if the post is a response show replyto at
+        //the top of the post.
+        //Handels the commenting functionality
         [HttpPost]
         public async Task<IActionResult> Index(BlogDetails blogDetails)
         {
@@ -99,6 +102,66 @@ namespace Blog.Controllers
                 return RedirectToAction("Index", "Home", new {handel = blogDetails.UrlHandle});
             }
 
+            return Forbid();
+        }
+
+        //Reply to post with a post functionality
+        public new async Task<IActionResult> Response(string urlHandel)
+        {
+            if (loginManager.IsSignedIn(User))
+            {
+                var blog = await blogRepo.GetUrlHandelAsync(urlHandel);
+                var refBlog = new BlogResponseDetails
+                {
+                    Id = blog.Id,
+                    Heading = blog.Heading,
+                    PageTitle = blog.PageTitle,
+                    FeaturedImageUrl = blog.FeaturedImageUrl,
+                    Visible = blog.Visible,
+                };
+
+                return View(refBlog);
+
+            }
+            return Forbid();
+        }
+        //ToDo: Edit the view
+        [HttpPost]
+        public new async Task<IActionResult> Response(BlogResponseDetails blogDetails)
+        {
+            if (loginManager.IsSignedIn(User))
+            {
+                string urlId = Guid.NewGuid().ToString("N");
+
+                // Combine the title and unique identifier and create a URL-friendly string
+                string urlHandle = $"{blogDetails.Author}-{urlId}".ToLower().Replace(" ", "-");
+
+                var blogPost = new BlogPost
+                {
+                    Heading = blogDetails.Heading,
+                    PageTitle = blogDetails.PageTitle,
+                    Content = blogDetails.Content,
+                    ShortDescription = blogDetails.ShortDescription,
+                    FeaturedImageUrl = blogDetails.FeaturedImageUrl,
+                    UrlHandle = urlHandle,
+                    PublishedDate = DateTime.Now,
+                    Author = blogDetails.Author,
+                    Visible = blogDetails.Visible,
+                    ReplyToId = blogDetails.Id,
+                };
+                if (loginManager.IsSignedIn(User) == true)
+                {
+                    blogPost.UserId = Guid.Parse(userManager.GetUserId(User));
+
+                }
+                
+                blogPost.Tags = blogDetails.Tags;
+
+                await blogRepo.AddAsync(blogPost);
+                TempData["Message"] = "Your post request has been saved! The site admin will review it shortly.";
+
+                return RedirectToAction("Index", "Blog");
+            }
             return Forbid();
         }
     }

@@ -28,7 +28,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Content</label>
-                <textarea class="form-control" id="content" asp-for="Content">@Html.Raw(Model.Content)</textarea>
+                <textarea class="form-control" id="content" asp-for="Content"></textarea>
             </div>
             <div class="mb-3">
                 <label class="form-label">Short Desciption</label>
@@ -113,6 +113,9 @@
         //    theme: 'snow',
         //    imageUploadURL: '/api/images'
         //});
+
+       
+
         
         //Image functionality
         const featuredUpload = document.getElementById("featuredImageUpload");

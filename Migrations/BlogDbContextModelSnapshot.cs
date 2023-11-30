@@ -32,6 +32,9 @@ namespace Blog.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -53,6 +56,9 @@ namespace Blog.Migrations
                     b.Property<DateTime>("PublishedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("ReplyToId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ShortDescription")
                         .HasColumnType("nvarchar(max)");
 
@@ -73,6 +79,8 @@ namespace Blog.Migrations
                         .HasColumnType("bit");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
 
                     b.HasIndex("UserId1");
 
@@ -236,6 +244,10 @@ namespace Blog.Migrations
 
             modelBuilder.Entity("Blog.Models.Domain.BlogPost", b =>
                 {
+                    b.HasOne("Blog.Models.Domain.BlogPost", null)
+                        .WithMany("BlogReplies")
+                        .HasForeignKey("BlogPostId");
+
                     b.HasOne("Blog.Models.Domain.UserDomain", "User")
                         .WithMany("BlogPosts")
                         .HasForeignKey("UserId1");
@@ -299,6 +311,8 @@ namespace Blog.Migrations
 
             modelBuilder.Entity("Blog.Models.Domain.BlogPost", b =>
                 {
+                    b.Navigation("BlogReplies");
+
                     b.Navigation("Comments");
 
                     b.Navigation("Likes");

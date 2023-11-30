@@ -8,7 +8,8 @@
             </h1>
             <p class="lead">
                 VPost features various blogs and projects that cover a
-                wide variety of topics and ideas.
+                wide variety of topics and ideas. Please login or create an account to access all
+                features including, commenting, replying, and creating/saving a post.
             </p>
         </div>
         
@@ -33,6 +34,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-6">
+
             @if(Model != null && Model.blogPosts.Any())
             {
                 foreach(var post in Model.blogPosts)

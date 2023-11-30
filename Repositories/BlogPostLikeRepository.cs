@@ -20,6 +20,19 @@ namespace Blog.Repositories
             return blogLike;
         }
 
+        public async Task<BlogPostLike?> RemoveLike(BlogPostLike blogLike)
+        {
+            var deletedLike = await dbContext.BlogPostLikes.FirstOrDefaultAsync(l => l.BlogPostId == blogLike.BlogPostId && l.UserId == blogLike.UserId);
+
+            if (deletedLike != null)
+            {
+                dbContext.BlogPostLikes.Remove(deletedLike);
+                await dbContext.SaveChangesAsync();
+            }
+            
+            return deletedLike;
+        }
+
         public async Task<IEnumerable<BlogPostLike>> GetAllBlogPostLikes(Guid postId)
         {
             var like = await dbContext.BlogPostLikes.Where(p => p.BlogPostId == postId).ToListAsync();
