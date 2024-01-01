@@ -2,11 +2,11 @@
   "dependencies": {
     "mssql2": {
       "restored": true,
-      "restoreTime": "2023-11-19T17:27:47.9868858Z"
+      "restoreTime": "2023-11-30T20:34:20.8093162Z"
     },
     "mssql1": {
       "restored": true,
-      "restoreTime": "2023-11-19T17:07:16.2831266Z"
+      "restoreTime": "2023-11-30T20:33:29.5315041Z"
     }
   },
   "parameters": {
@@ -25,10 +25,30 @@
       "Type": "resourceGroup",
       "Value": "VPost"
     },
+    "VPost.resourceGroupName": {
+      "Name": "VPost.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "VPost"
+    },
+    "VPost.resourceName": {
+      "Name": "VPost.resourceName",
+      "Type": null,
+      "Value": "VPost"
+    },
     "mssql2.subscriptionId": {
       "Name": "mssql2.subscriptionId",
       "Type": "subscription",
       "Value": "0a92abf9-2b92-466a-bbb7-fe8831d4319d"
+    },
+    "VPost.subscriptionId": {
+      "Name": "VPost.subscriptionId",
+      "Type": "subscription",
+      "Value": "0a92abf9-2b92-466a-bbb7-fe8831d4319d"
+    },
+    "VPost.resourceGroupLocation": {
+      "Name": "VPost.resourceGroupLocation",
+      "Type": null,
+      "Value": "eastus"
     }
   }
 }

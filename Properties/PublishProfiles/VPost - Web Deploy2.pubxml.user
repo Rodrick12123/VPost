@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/x7tuqBhsEGwfdgSBbJs9wAAAAACAAAAAAAQZgAAAAEAACAAAABv8MyeBP7XHiGNItybknX2nWvaJe54i5dn5Gc9JJjrIQAAAAAOgAAAAAIAACAAAAArzgbOrgzuVbAQZ6MCf5NYc5p0LK+O2JjHz/DV8Gu9j4AAAACmfhZaCLdRn1QXda80SwCcMO9vBim05eV/MAWSJAwtXTeXbyXaHPyQzb/H/FjDRWYiqS5TTSWXf9HXhazoa4pW9x2s75LOH/rkH1txxUfpHBwMMDtvwYZBYiqpcXIIDov9fzsfwgOKvMzY4Vmh6fQ2Ykhnzu5upHMIqQqbpsSOrkAAAADr8/vKnMtWENFLKl9t8flmm30vocTEpFdEIu3UK7wdPatN7Qf2W5F6L71tlwADuCZt1l5+T+/eauaDiL4QnWn3</EncryptedPassword>
+    <History>True|2023-11-30T21:07:05.6543114Z;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <AzureDBConnectionStrings Include="Data Source=blogdbserver.database.windows.net,1433;Initial Catalog=BlogDb;User ID=VPostAdmin;Password=Fireboy12123!" />
+    <AzureDBConnectionStrings Include="Data Source=blogdbserver.database.windows.net,1433;Initial Catalog=BlogDbAuth;User ID=VPostAdmin;Password=Fireboy12123!" />
+  </ItemGroup>
+</Project>

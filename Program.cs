@@ -18,6 +18,10 @@ if(enviroment.IsDevelopment())
 
     builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BlogAuthDBConnectionString")));
 
+    //builder.Services.AddDbContext<BlogDbContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("Default")));
+
+    //builder.Services.AddDbContext<AuthDbContext>(options => options.UseMySQL(builder.Configuration.GetConnectionString("Default")));
+
 }
 else if (enviroment.IsProduction())
 {

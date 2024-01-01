@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project>
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/x7tuqBhsEGwfdgSBbJs9wAAAAACAAAAAAAQZgAAAAEAACAAAABb6CEbSU6o4MO6z8NWtjwAjYt8X5AstNM20r2fqKWhtgAAAAAOgAAAAAIAACAAAABkZMzctn8AcRALFqZLqHxmNhX+QEb3SVhWuwzxV6em/YAAAACBTOAFU5/la3KfqJm6fNL8evSEKRdrrw53Xd0oPwIkIqLBwpGVhKBO1YGbuK0ZWZGPpOgedAP0Lg+Jmw+5S8RoSUNngctMujF8fuFTM7nPlVbGtSMeSjp2pIeiSrM9H4gCDCpIVC8/wNDSEgoUx4OJ1qZOb9CPMd7BgTTW23uTe0AAAAB3+AqSToaAXGACa8R5gf9LFKIOGOhzEjgmD1zoK9ohDzU2nV9KNwF3JSx/fWxsj2w9X4VuSHMe9DOKRdJ9FlBF</EncryptedPassword>
+    <History>True|2023-12-11T19:29:30.6017653Z;True|2023-12-03T06:21:25.6436214-06:00;True|2023-12-01T06:17:33.2196735-06:00;False|2023-12-01T06:09:59.1265430-06:00;True|2023-11-30T17:15:42.2059975-06:00;True|2023-11-30T17:13:21.8672883-06:00;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+  <ItemGroup>
+    <AzureDBConnectionStrings Include="Data Source=blogdbserver.database.windows.net,1433;Initial Catalog=BlogDb;User ID=VPostAdmin;Password=Fireboy12123!" />
+    <AzureDBConnectionStrings Include="Data Source=blogdbserver.database.windows.net,1433;Initial Catalog=BlogDbAuth;User ID=VPostAdmin;Password=Fireboy12123!" />
+  </ItemGroup>
+</Project>

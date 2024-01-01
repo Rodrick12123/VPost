@@ -1,12 +1,14 @@
 {
   "dependencies": {
-    "mssql1": {
-      "type": "mssql",
-      "connectionId": "ConnectionStrings:ProductionBlogDBConnectionString"
-    },
     "mssql2": {
       "type": "mssql",
-      "connectionId": "ConnectionStrings:ProductionBlogAuthDBConnectionString"
+      "connectionId": "ConnectionStrings:ProductionBlogAuthDBConnectionString",
+      "dynamicId": null
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:ProductionBlogDBConnectionString",
+      "dynamicId": null
     }
   }
 }
